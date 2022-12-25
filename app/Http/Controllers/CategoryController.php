@@ -10,9 +10,9 @@ use App\Http\Requests\CategoryRequest;
 class CategoryController extends Controller
 {
     protected $category;
-    public function __construct(CategoryInterface $Category)
+    public function __construct(CategoryInterface $category)
     {
-        $this->category = $Category;
+        $this->category = $category;
     }
 
     public function index()
@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        //
+        return $this->category->showCategory($request);
     }
 
     public function update(CategoryRequest $request, Category $category)
@@ -37,6 +37,6 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        //
+        return $this->category->deleteCategory($category);
     }
 }

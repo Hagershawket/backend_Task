@@ -7,9 +7,11 @@ interface CategoryInterface{
 
     public function storeCategory($request);
 
+    public function showCategory($category);
+
     public function updateCategory($request , $category);
 
-    public function deleteCategory($request);
+    public function deleteCategory($category);
 
 }
 

@@ -23,19 +23,35 @@ class CategoryRepository implements CategoryInterface{
             $category = Category::create([
                 'name'   =>  $request->name,
             ]);
+            return $this->returnData('data', new CategoryResource($category) , 'Data Created Successfully');
+        }catch (\Exception $e) {
+            return $this->returnError(404, $e->getMessage());
+        }
+    }
+
+    public function showCategory($category)
+    {
+        $category = new CategoryResource(Category::findOrFail($category));
+        return $this->returnData('data', $category);
+    }
+
+    public function updateCategory($request , $category)
+    {
+        try{
+            $category->update([
+                'name'   =>  $request->name,
+            ]);
             return $this->returnData('data', new CategoryResource($category));
         }catch (\Exception $e) {
             return $this->returnError(404, $e->getMessage());
         }
     }
 
-    public function updateCategory($request , $category)
+    public function deleteCategory($category)
     {
         try{
-            $updatedCategory = $category->update([
-                'name'   =>  $request->name,
-            ]);
-            return $this->returnData('data', new CategoryResource($updatedCategory));
+            $category->delete();
+            return $this->returnSuccessMessage('Data Deleted Successfully');
         }catch (\Exception $e) {
             return $this->returnError(404, $e->getMessage());
         }

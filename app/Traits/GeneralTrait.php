@@ -23,10 +23,11 @@ trait GeneralTrait
         ];
     }
 
-    public function returnData($key, $value)
+    public function returnData($key, $value, $msg="Opperation Complete Successfully")
     {
         return response()->json([
             'status' => true,
+            'msg'    => $msg,
             $key     => $value
         ]);
     }
